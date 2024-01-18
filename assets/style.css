@@ -123,17 +123,17 @@ header {
 }
 /* Code CSS en prévision de l'ajout d'un carousel pour la bannière */
 /* Gestion des fleches du carrousel */
-#banner .arrow {
+#banner .carousel__button {
 	position: absolute;
 	border: none;
 	outline: none;
 	background: none;
 	cursor: pointer;
 }
-#banner .arrow_left {
+#banner .carousel__button--left {
 	left: 10px;
 }
-#banner .arrow_right {
+#banner .carousel__button--right {
 	right: 10px;
 }
 
@@ -146,12 +146,12 @@ header {
 	position: relative;
 }
 
-.carousel_list {
+.carousel__list {
 	width: 100%;
 	min-height: 470px;
 }
 
-.carousel_slide {
+.carousel__slide {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
@@ -162,12 +162,12 @@ header {
 	bottom: 0;
 }
 /* Gestion des points du carrousel */
-.carousel_nav {
+.carousel__nav {
 	position: absolute;
 	bottom: 40px;
 	display: flex;
 }
-.navigation_indicator {
+.navigation__indicator {
 	margin-inline: 5px;
 	width: 18px;
 	height: 18px;
@@ -181,7 +181,7 @@ header {
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);;
 	cursor: pointer;
 }
-.current_slide {
+.navigation__indicator.current-slide {
 	background-color: #fff;
 }
 /* Fin du code CSS pour le carousel */
