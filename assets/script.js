@@ -40,21 +40,37 @@ const setSlidePosition = (slide, index) => {
 slides.forEach(setSlidePosition);
 
 
+const moveToSlide = (track, currentSlide, targetSlide) => {
+	track.style.transform = 'translateX(-' + targetSlide.style.left + ')';
+	currentSlide.classList.remove('current-slide');
+	targetSlide.classList.add('current-slide');
+}
+
+
+
 
 // when I click left, move to the left
+prevButton.addEventListener('click', e => {
+	const currentSlide = track.querySelector('.current-slide');
+	const prevSlide = currentSlide.previousElementSibling;
+
+	moveToSlide(track, currentSlide, prevSlide);
+});
+
 // when I cklick right, move to the right
 nextButton.addEventListener('click', e => {
 const currentSlide = track.querySelector('.current-slide'); //use dot to find a class
 //console.log(currentSlide);
 const nextSlide = currentSlide.nextElementSibling;
-const amountToMove = nextSlide.style.left;
+/*const amountToMove = nextSlide.style.left;
 //console.log(amountToMove);
 	//move to the next slide
 	track.style.transform = 'translateX(-' + amountToMove + ')';
 	currentSlide.classList.remove('current-slide'); //no need to use dot 'cause searching for the class name (dot is not included in the name)
 	nextSlide.classList.add('current-slide');
-
-})
+*/
+moveToSlide(track, currentSlide, nextSlide);
+});
 
 
 // when I click the nav ind, move to that slide
