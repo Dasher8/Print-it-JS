@@ -52,16 +52,17 @@ const moveToSlide = (track, currentSlide, targetSlide) => {
 // when I click left, move to the left
 prevButton.addEventListener('click', e => {
 	const currentSlide = track.querySelector('.current-slide');
-	const prevSlide = currentSlide.previousElementSibling;
+	const prevSlide = currentSlide.previousElementSibling || slides[slides.length - 1]; // length - 1 used to get the index of the last slide in the array
 
 	moveToSlide(track, currentSlide, prevSlide);
+	
 });
 
 // when I cklick right, move to the right
 nextButton.addEventListener('click', e => {
 const currentSlide = track.querySelector('.current-slide'); //use dot to find a class
 //console.log(currentSlide);
-const nextSlide = currentSlide.nextElementSibling;
+const nextSlide = currentSlide.nextElementSibling || slides[0]; //If there is a next slide, use it. If there is no next slide, use the first slide.
 /*const amountToMove = nextSlide.style.left;
 //console.log(amountToMove);
 	//move to the next slide

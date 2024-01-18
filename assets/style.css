@@ -150,7 +150,6 @@ header {
 .carousel__list {
 	width: 100%;
 	min-height: 470px;
-	transition: transform 250ms ease-in;
 }
 
 .carousel__slide {
