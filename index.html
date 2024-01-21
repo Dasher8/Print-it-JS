@@ -11,6 +11,8 @@
 	<link
 		href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Slab:wght@400;900&display=swap"
 		rel="stylesheet">
+
+		<script defer src="./assets/script.js"></script>
 </head>
 
 <body>
@@ -23,24 +25,12 @@
 	<main>
 		<div id="banner">
 			<div class="carousel">
-			<ul class="carousel__list">
-				<li class="carousel__slide current-slide">
-					<img class="banner-img" src="./assets/images/slideshow/slide1.jpg" alt="Banner Print-it">
-					<p class="slide_text">Impressions tous formats <span>en boutique et en ligne</span></p>
-				</li>
-				<li class="carousel__slide">
-					<img class="banner-img" src="./assets/images/slideshow/slide2.jpg" alt="Banner Print-it">
-					<p class="slide_text">Tirages haute définition grand format <span>pour vos bureaux et events</span></p>
-				</li>
-				<li class="carousel__slide">
-					<img class="banner-img" src="./assets/images/slideshow/slide3.jpg" alt="Banner Print-it">
-					<p class="slide_text">Grand choix de couleurs <span>de CMJN aux pantones</span></p>
-				</li>
-				<li class="carousel__slide">
-					<img class="banner-img" src="./assets/images/slideshow/slide4.png" alt="Banner Print-it">
-					<p class="slide_text">Autocollants <span>avec découpe laser sur mesure</span></p>
-				</li>
-			</ul>
+			<div class="carousel__list">
+				<div class="carousel__slide current-slide">
+					<img class="banner-img" alt="Banner Print-it">
+					<p class="slide_text"></p>
+				</div>
+			</div>
 			<button class="carousel__button carousel__button--left">
 				<img src="./assets/images/arrow_left.png" alt="Une flèche gauche">
 			</button>
@@ -48,10 +38,6 @@
 				<img src="./assets/images/arrow_right.png" alt="Une flèche droite">
 			</button>
 			<div class="carousel__nav">
-				<button class="navigation__indicator current-slide"></button>
-				<button class="navigation__indicator"></button>
-				<button class="navigation__indicator"></button>
-				<button class="navigation__indicator"></button>
 			</div>
 		</div>
 		</div>
@@ -167,7 +153,6 @@
 			<img class="footer-logo" src="./assets/images/logo.png" alt="Print it ! Impressions d'entreprises">
 		</div>
 	</footer>
-	<script src="./assets/script.js"></script>
 </body>
 
 </html>

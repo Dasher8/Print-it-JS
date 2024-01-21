@@ -1,4 +1,4 @@
-/*const slides = [
+const slides = [
 	{
 		"image":"slide1.jpg",
 		"tagLine":"Impressions tous formats <span>en boutique et en ligne</span>"
@@ -15,92 +15,95 @@
 		"image":"slide4.png",
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
-]*/
+]
 
-const track = document.querySelector('.carousel__list');
-const slides = Array.from(track.children);
-const nextButton = document.querySelector('.carousel__button--right');
-const prevButton = document.querySelector('.carousel__button--left');
-const dotsNav = document.querySelector('.carousel__nav');
-const dots = Array.from(dotsNav.children);
-// console.log(dots);
+const btnSlideNext = document.querySelector('.carousel__button--right');
+const btnSlidePrevious = document.querySelector('.carousel__button--left');
+const dotsContainer = document.querySelector('.carousel__nav');
+const slideImage = document.querySelector('.banner-img');
+const slideText = document.querySelector('.slide_text');
 
-const slideWidth = slides[0].getBoundingClientRect().width;
-//console.log(slideWidth);
+let counter = 0;
 
-//arrange the slides next to each other
+displaySlide();
 
-//slides[0].style.left = slideWidth * 0 //number is an index// + 'px';
-//slides[1].style.left = slideWidth * 1 + 'px';
-//slides[2].style.left = slideWidth * 2 + 'px';
+createSliderDots();
 
-const setSlidePosition = (slide, index) => {
-	slide.style.left = slideWidth * index + 'px';
-};
-slides.forEach(setSlidePosition);
+targetIndicator();
 
 
-const moveToSlide = (track, currentSlide, targetSlide) => {
-	track.style.transform = 'translateX(-' + targetSlide.style.left + ')';
-	currentSlide.classList.remove('current-slide');
-	targetSlide.classList.add('current-slide');
+
+
+
+/**
+ * Modifie l'affichage de la slide lorsque l'on clique sur le bouton suivant
+ */
+btnSlideNext.addEventListener('click', () => {
+    counter = counter + 1 
+
+    if(counter > slides.length - 1){
+        counter = 0;   
+    }
+
+    displaySlide()
+})
+
+/**
+ * Modifie l'affichage de la slide lorsque l'on clique sur le bouton précédent
+ */
+btnSlidePrevious.addEventListener('click', () => {
+    counter = counter - 1
+
+    if(counter < 0){
+        counter = slides.length - 1
+    }
+
+    displaySlide()
+})
+
+/**
+ * Affiche la slide courante en fonction du counter
+ */
+function displaySlide() {
+    slideImage.setAttribute('src', `/assets/images/slideshow/${slides[counter].image}`)
+    slideText.innerHTML = slides[counter].tagLine;
+
+    targetIndicator();
 }
 
-const updateDots = (currentDot, targetDot) => {
-	currentDot.classList.remove('current-slide');
-    targetDot.classList.add('current-slide');
+/**
+ * Créer le même nombre de dots qu'il y a de slides à afficher
+ */
+function createSliderDots(){
+
+
+    for(let i = 0; i < slides.length; i++){
+        const dot = document.createElement('button'); 
+        dot.classList.add('navigation__indicator'); 
+    
+        dotsContainer.append(dot);
+    
+        dot.addEventListener('click', () => {
+            counter = i;
+            displaySlide();
+        })
+    
+    }
+
 }
 
 
-// when I click left, move to the left
-prevButton.addEventListener('click', e => {
-	const currentSlide = track.querySelector('.current-slide');
-	const prevSlide = currentSlide.previousElementSibling || slides[slides.length - 1]; // length - 1 used to get the index of the last slide in the array
-	const currentDot = dotsNav.querySelector('.current-slide');
-	const prevDot = currentDot.previousElementSibling || dots[dots.length - 1];
+// change le couleur d'indicateur s'il correspond au current slide
+function targetIndicator() {
+    const dots = document.querySelectorAll('.navigation__indicator');
 
-	moveToSlide(track, currentSlide, prevSlide);
-	updateDots(currentDot, prevDot);
-	
-});
+    dots.forEach((dot, index) => {
+        if (index === counter) {
+            dot.classList.add('navigation__indicator--target');
+        } else {
+            dot.classList.remove('navigation__indicator--target');
+        }
 
-// when I cklick right, move to the right
-nextButton.addEventListener('click', e => {
-const currentSlide = track.querySelector('.current-slide'); //use dot to find a class
-//console.log(currentSlide);
-const nextSlide = currentSlide.nextElementSibling || slides[0]; //If there is a next slide, use it. If there is no next slide, use the first slide.
-/*const amountToMove = nextSlide.style.left;
-//console.log(amountToMove);
-	//move to the next slide
-	track.style.transform = 'translateX(-' + amountToMove + ')';
-	currentSlide.classList.remove('current-slide'); //no need to use dot 'cause searching for the class name (dot is not included in the name)
-	nextSlide.classList.add('current-slide');
-*/
-const currentDot = dotsNav.querySelector('.current-slide');
-const nextDot = currentDot.nextElementSibling || dots[0];
-
-moveToSlide(track, currentSlide, nextSlide);
-updateDots(currentDot, nextDot);
-});
-
-
-// when I click the nav ind, move to that slide
-
-dotsNav.addEventListener('click', e => {
-	// what ind was cklicked on
-const targetDot = e.target.closest('button');
-//console.log(targetDot);
-if (!targetDot) return;
-
-const currentSlide = track.querySelector('.current-slide');
-const currentDot = dotsNav.querySelector('.current-slide');
-const targetIndex = dots.findIndex(dot => dot === targetDot);
-//console.log(dots);
-//console.log(targetIndex);
-const targetSlide = slides[targetIndex];
-
-moveToSlide(track, currentSlide, targetSlide);
-updateDots(currentDot, targetDot);
-});
-
-
+    } 
+    )
+}

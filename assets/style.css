@@ -172,17 +172,13 @@ header {
 	margin-inline: 5px;
 	width: 18px;
 	height: 18px;
-	/* original
-	width: 13px;
-	height: 13px;
-	*/
 	background-color: #ffffff00;
 	border: 3px solid #fff;
 	border-radius: 100%;
 	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);;
 	cursor: pointer;
 }
-.navigation__indicator.current-slide {
+.navigation__indicator--target {
 	background-color: #fff;
 }
 /* Fin du code CSS pour le carousel */
