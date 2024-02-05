@@ -18,43 +18,75 @@ const slides = [
   },
 ];
 
-const btnSlideNext = document.querySelector(".carousel__button--right");
-const btnSlidePrevious = document.querySelector(".carousel__button--left");
+const rightArrowButton = document.querySelector(".carousel_button_right");
+const leftArrowButton = document.querySelector(".carousel_button_left");
 const dotsContainer = document.querySelector(".carousel__nav");
 const slideImage = document.querySelector(".banner-img");
 const slideText = document.querySelector(".slide_text");
 
 let counter = 0;
 
+createArrowButtons();
+
 createSliderDots();
 
 displaySlide();
 
-/**
- * Modifie l'affichage de la slide lorsque l'on clique sur le bouton suivant
- */
-btnSlideNext.addEventListener("click", () => {
-  counter = counter + 1;
+//create arrow buttons
+function createArrowButtons() {
+  // Select the div where you want to place the buttons
+  const carousel = document.querySelector(".carousel");
 
-  if (counter > slides.length - 1) {
-    counter = 0;
-  }
+  // Create left arrow button
+  const leftArrowButton = document.createElement("button");
+  leftArrowButton.classList.add("carousel_button", "carousel_button_left");
 
-  displaySlide();
-});
+  const leftArrowImage = document.createElement("img");
+  leftArrowImage.setAttribute("src", "/assets/images/arrow_left.png");
+  leftArrowImage.setAttribute("alt", "Une flèche gauche");
 
-/**
- * Modifie l'affichage de la slide lorsque l'on clique sur le bouton précédent
- */
-btnSlidePrevious.addEventListener("click", () => {
-  counter = counter - 1;
+  leftArrowButton.appendChild(leftArrowImage);
 
-  if (counter < 0) {
-    counter = slides.length - 1;
-  }
+  // Create right arrow button
+  const rightArrowButton = document.createElement("button");
+  rightArrowButton.classList.add("carousel_button", "carousel_button_right");
 
-  displaySlide();
-});
+  const rightArrowImage = document.createElement("img");
+  rightArrowImage.setAttribute("src", "/assets/images/arrow_right.png");
+  rightArrowImage.setAttribute("alt", "Une flèche droite");
+
+  rightArrowButton.appendChild(rightArrowImage);
+
+  // Append buttons to the carousel
+  carousel.appendChild(leftArrowButton);
+  carousel.appendChild(rightArrowButton);
+
+  /**
+   * Modifie l'affichage de la slide lorsque l'on clique sur le bouton suivant
+   */
+  rightArrowButton.addEventListener("click", () => {
+    counter = counter + 1;
+
+    if (counter > slides.length - 1) {
+      counter = 0;
+    }
+
+    displaySlide();
+  });
+
+  /**
+   * Modifie l'affichage de la slide lorsque l'on clique sur le bouton précédent
+   */
+  leftArrowButton.addEventListener("click", () => {
+    counter = counter - 1;
+
+    if (counter < 0) {
+      counter = slides.length - 1;
+    }
+
+    displaySlide();
+  });
+}
 
 /**
  * Affiche la slide courante en fonction du counter
